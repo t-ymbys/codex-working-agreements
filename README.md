@@ -31,10 +31,13 @@ outcome is satisfied.
         │   ├── SKILL.md
         │   ├── references/
         │   └── assets/
-        └── experience-promotion/
+        ├── experience-promotion/
+        │   ├── SKILL.md
+        │   ├── references/
+        │   └── assets/
+        └── multidisciplinary-review/
             ├── SKILL.md
-            ├── references/
-            └── assets/
+            └── references/
 ```
 
 ## Included skills
@@ -59,6 +62,17 @@ Deeper analysis is reserved for important failures, recurring problems,
 high-reuse techniques, or explicit self-improvement requests. Promotion ranges
 from transient context to deterministic guardrails, with stronger evidence and
 review required as impact increases.
+
+### Multidisciplinary Review
+
+A selective cross-domain review workflow for consequential decisions, frontier
+questions, and explicit requests for top-tier professional perspectives.
+
+It translates named exemplars into scientific-discovery, philosophical,
+strategy-and-systems, founder-and-executive, and AI/ML/cloud evaluation lenses.
+It loads only the lenses that can change the decision, preserves disagreement,
+and ends with a test, recommendation, or next action rather than prestige-based
+role-play.
 
 ## Use
 

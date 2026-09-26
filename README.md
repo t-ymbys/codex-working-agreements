@@ -35,9 +35,11 @@ outcome is satisfied.
         │   ├── SKILL.md
         │   ├── references/
         │   └── assets/
-        └── multidisciplinary-review/
-            ├── SKILL.md
-            └── references/
+        ├── multidisciplinary-review/
+        │   ├── SKILL.md
+        │   └── references/
+        └── local-first-app-development/
+            └── SKILL.md
 ```
 
 ## Included skills
@@ -74,12 +76,20 @@ It loads only the lenses that can change the decision, preserves disagreement,
 and ends with a test, recommendation, or next action rather than prestige-based
 role-play.
 
+### Local-First App Development
+
+A release-safety workflow for app and game work. Local development, testing,
+and previews remain local by default; deployment or distribution requires an
+explicit request naming the destination and release scope. It also distinguishes
+access restriction from verified deletion when cleaning up unintended online
+resources.
+
 ## Use
 
 Clone the repository and review the files before adopting them:
 
 ```sh
-git clone git@github.com:t-ymbys/codex-working-agreements.git
+git clone https://github.com/t-ymbys/codex-working-agreements.git
 cd codex-working-agreements
 ```
 
@@ -101,8 +111,9 @@ the instructions against representative tasks in your own environment.
 - This is a personal working configuration, not an official OpenAI project.
 - The skill files have passed static structure and frontmatter validation in the
   author's environment.
-- Automatic discovery and behavioral effectiveness have not been established
-  by a controlled benchmark.
+- The documented repository and user skill paths were checked against current
+  official Codex documentation. Behavioral effectiveness has not been
+  established by a controlled benchmark.
 - Some rules are intentionally conservative and may be too heavy for disposable
   prototypes.
 - Paths and supported behavior can change as Codex evolves; consult current
@@ -110,9 +121,9 @@ the instructions against representative tasks in your own environment.
 
 ## Snapshot provenance
 
-The initial public version is a sanitized snapshot of the author's active
-configuration as of 2026-09-16. Mutable memory, task history, credentials, local
-configuration, and private research artifacts are not included.
+This repository is a sanitized snapshot of the author's active working
+agreements, reviewed on 2026-09-26. Mutable memory, task history, credentials,
+local configuration, and private research artifacts are not included.
 
 ## License
 

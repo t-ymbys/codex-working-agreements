@@ -133,6 +133,8 @@ Do not use it as a chronological diary.
 
 Keep it current and concise.
 
+Use [../assets/HANDOFF.template.md](../assets/HANDOFF.template.md) as a starting point when the project does not already have a suitable handoff format.
+
 Recommended structure:
 
 ```markdown

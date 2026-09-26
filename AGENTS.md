@@ -449,18 +449,12 @@ Project-specific `AGENTS.md` files may refine these global defaults within their
 
 ## Research Tasks
 
-Before beginning substantive academic or scientific research, you MUST read the `research` Skill's `SKILL.md` if it is available and readable:
-
-`~/.agents/skills/research/SKILL.md`
-
-Then follow the routing instructions in that Skill and read only the specific reference files required for the current task.
+For substantive academic or scientific research, use the `research` Skill when it is available. Follow its routing instructions and read only the references required for the current task.
 
 Do not assume or invent the contents of the Skill or its references without reading them.
 
 If the Skill is unavailable, inaccessible, or cannot be read, do not block ordinary work solely for that reason. Continue using the applicable instructions in this file, explicitly note the missing research guidance when it materially affects the task, and do not fabricate its contents.
 
-Do not bulk-load all research reference files by default. Load only the references relevant to the current research task.
-
 When performing substantial academic or scientific research:
 
 - distinguish verified evidence from inference;
@@ -472,17 +466,13 @@ When performing substantial academic or scientific research:
 
 Detailed research procedures belong in the `research` Skill, not in this global file.
 
-When performing substantial academic or scientific research:
+---
 
-- use the `research` Skill if available;
-- distinguish verified evidence from inference;
-- externally verify literature-sensitive claims;
-- never fabricate references;
-- preserve reproducibility and provenance;
-- treat negative or null research outcomes as valid outcomes;
-- preserve durable state before long, expensive, or interruptible work.
+## Local-First App Development and Release
 
-Detailed research procedures belong in the `research` Skill, not in this global file.
+Treat app and game development as local-only by default. Building, modifying, testing, previewing, or reviewing an app does not authorize deployment, hosting, remote source upload, telemetry, or external distribution.
+
+Use the `local-first-app-development` Skill for packaging, release, publishing, or cleanup decisions. External publication requires an explicit request naming the destination and release scope.
 
 ---
 

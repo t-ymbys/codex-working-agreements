@@ -1,6 +1,6 @@
 ---
 name: experience-promotion
-description: Capture and govern potentially durable operational lessons from important failures, explicit user feedback, newly discovered constraints, or clearly reusable techniques. Do not use for ordinary successful tasks, trivial edits, one-off noise, or routine post-task reflection.
+description: Capture and govern durable operational lessons from important failures, explicit user feedback, new constraints, or reusable techniques. Skip routine successes, trivial edits, one-off noise, and ordinary post-task reflection.
 ---
 
 # Experience Promotion
@@ -93,7 +93,7 @@ Do not load all references by default.
 
 ## Mutable Learning Store
 
-When an authorized workflow needs durable state, use `~/.codex/learning/` as an environment-specific convention, not as part of the Agent Skills standard:
+When an authorized workflow needs durable state, use `${CODEX_HOME:-$HOME/.codex}/learning/` as an environment-specific convention, not as part of the Agent Skills standard:
 
 ```text
 INDEX.md
@@ -125,4 +125,3 @@ Operational learning must not materially dominate the primary task. Default limi
 ## Stopping Condition
 
 Stop when any needed observation is captured, significance is sufficiently assessed, the lowest sufficient layer is selected, uncertainty is preserved, unnecessary immediate promotion is deferred, and the primary task can resume. Do not optimize for perfect self-analysis.
-

@@ -1,118 +1,81 @@
 ---
 name: research
-description: Conduct rigorous academic and scientific research, including literature and novelty review, theorem or model scrutiny, empirical inference, reproducibility, manuscript work, and interrupted-project recovery. Use when claims require external evidence, scientific validation, or publication-quality analysis.
+description: Conduct rigorous academic or scientific research with verified literature, explicit claim status, adversarial validation, and reproducible evidence. Use for novelty review, theorem or model scrutiny, empirical inference, manuscript or publication assessment, and interrupted research recovery.
 ---
 
 # Research
 
 ## Objective
 
-Determine as accurately as the available evidence allows:
-
-- what is already known;
-- what is being claimed;
-- whether the claim is correct and new;
-- what evidence distinguishes it from alternatives;
-- what remains uncertain;
-- what next work is justified.
+Determine what is known, what is claimed, whether the claim is correct and new, what evidence distinguishes it from alternatives, and what work is justified next.
 
 Do not optimize for validating the initial idea. Null results, counterexamples, non-novel findings, and failed hypotheses are valid outcomes.
 
-## Epistemic Discipline
+## Core Discipline
 
-Keep relevant states distinct. Use labels when they improve clarity:
+- State the research question, scope, assumptions, comparison class, success criteria, and falsification or stop condition before investing in a sophisticated method.
+- Distinguish `VERIFIED`, `DERIVED`, `NUMERICAL OBSERVATION`, `HYPOTHESIS`, `CONJECTURE`, `SPECULATION`, and `NOT VERIFIED` when the distinction affects the decision.
+- Treat model memory as a source of search hypotheses, not evidence. Literature-sensitive claims require external retrieval.
+- Evaluate correctness, novelty, significance, and publication readiness separately.
+- Seek competing hypotheses, counterexamples, hidden assumptions, boundary cases, simpler explanations, and artifacts.
+- Preserve the provenance needed to reconstruct important claims.
+- Never fabricate references, metadata, execution, or validation.
 
-- `FACT` — directly verified factual information;
-- `ESTABLISHED RESULT` — supported by reliable existing literature;
-- `DERIVED RESULT` — derived in the current work;
-- `PREVIOUS UNPUBLISHED RESULT` — prior unpublished result supplied by the researcher;
-- `NUMERICAL OBSERVATION` — computed or observed but not analytically established;
-- `HYPOTHESIS` — empirically or conceptually motivated proposition;
-- `CONJECTURE` — mathematically formulated but unproved claim;
-- `RESEARCH QUESTION` — unresolved question;
-- `SPECULATION` — plausible but weakly supported interpretation;
-- `NOT VERIFIED` — source or correctness not verified.
+## Route Before Reading
 
-Do not silently promote one state into another. In particular, do not confuse numerical agreement with proof, correlation with causation, structural analogy with identity, or failure to find prior art with proof of novelty.
+Classify the task, then read only the references that can change the result.
 
-Literature-sensitive claims require external retrieval. Model memory may suggest queries or candidate references but is not evidence. If retrieval is unavailable or incomplete, mark affected claims `NOT VERIFIED`, state the limitation, and weaken or defer novelty and attribution conclusions. Never fabricate references or metadata.
+| Task type | Read |
+|---|---|
+| Literature review or prior-art search | [literature.md](references/literature.md) |
+| Novelty assessment | [literature.md](references/literature.md); add [critical-review.md](references/critical-review.md) when significance or defensibility matters |
+| Mathematical or theoretical research | [mathematical-research.md](references/mathematical-research.md); add [verification.md](references/verification.md) for a correctness claim |
+| Computational or numerical research | [computational-research.md](references/computational-research.md); add [verification.md](references/verification.md) for central results |
+| Empirical or statistical research | [empirical-research.md](references/empirical-research.md); add [verification.md](references/verification.md) for central results |
+| Claim, proof, citation, implementation, or reproduction check | [verification.md](references/verification.md) plus the one relevant domain reference |
+| Independent or reviewer-style challenge | [critical-review.md](references/critical-review.md); add [literature.md](references/literature.md) only for prior-art or novelty questions |
+| Manuscript revision or publication assessment | [publication-reproducibility.md](references/publication-reproducibility.md); add domain, literature, verification, or critical-review references only as required by the claims |
+| Interrupted work, uncertain state, handoff, context isolation, or high-cost escalation | Read [recovery-context.md](references/recovery-context.md) first |
 
-## Start with the Research Question
+Do not read every reference by default. A task spanning several modes may load several references, but each must have a concrete decision role.
 
-Before choosing a sophisticated method, identify as applicable:
+## Minimum Workflow
 
-- object of study and target claim;
-- scope, assumptions, and comparison class;
-- observables, estimand, or measurable outcome;
-- success criteria;
-- failure, falsification, or stop criteria.
+1. Recover current state first when the task is interrupted or uncertain.
+2. Identify the research phase: landscape, gap, formalization, pilot, full study, manuscript, or publication review.
+3. Define the central claim and the evidence that would discriminate it from the strongest alternative.
+4. Retrieve or inspect the minimum authoritative evidence needed for the current decision.
+5. Run the cheapest discriminating calculation, experiment, audit, or reproduction.
+6. Separate verification from critical review:
+   - verification asks whether the claim is correct;
+   - critical review asks whether a correct claim is meaningful, novel, well-scoped, and defensible.
+7. Report established results, evidence obtained, negative findings, unverified claims, limitations, and the next decision.
 
-Prefer a question for which competing answers can be distinguished by mathematics, computation, data, or experiment.
+## Search and Tool Discipline
 
-If the task resumes after interruption or the project state is uncertain, read [references/recovery_escalation.md](references/recovery_escalation.md) before substantive work. Reconstruct the project boundary, Git state, artifacts, claims, and validation already performed; do not blindly restart.
+Before open-ended investigation, define the target question, minimum evidence, effort bound, and stopping condition. Diversify queries or methods rather than repeating low-information calls.
 
-## Reference Routing
+Do not omit primary-source checks, counterexample searches, or validation merely to reduce tool use. Stop when sources become redundant, the effort bound is reached, or another method is more likely to resolve the uncertainty.
 
-Read only the references needed for the current task:
+Distinguish `not found within this search`, `no known example after substantial review`, and `proved not to exist`.
 
-- Read [references/literature_novelty.md](references/literature_novelty.md) for literature review, prior-art search, novelty, priority, attribution, or current-frontier claims.
-- Read [references/theoretical_computational.md](references/theoretical_computational.md) for theorem development, proof audit, mathematical modeling, symbolic computation, numerical mathematics, or theory-heavy work.
-- Read [references/empirical_data.md](references/empirical_data.md) for experiments, observational data, causal inference, prediction, benchmarks, statistical uncertainty, or sensitive datasets.
-- Read [references/reproducibility_publication.md](references/reproducibility_publication.md) for provenance, project organization, manuscript claims, publication assessment, or milestone review.
-- Read [references/recovery_escalation.md](references/recovery_escalation.md) for interrupted work, uncertain state, handoff, or preparation for high-cost reasoning.
+## Escalation and Independence
 
-Do not bulk-load all references.
+Use the least costly capability that can reliably perform the current step. Escalate only an isolated high-value uncertainty such as a difficult proof, ambiguous novelty claim, adversarial review, or unresolved conceptual conflict.
 
-## Core Workflow
-
-Adapt the depth to the research phase and stakes.
-
-1. **Recover state when needed.** Establish what exists, what ran, what changed, and what remains unvalidated.
-2. **Formalize the question.** State the claim, assumptions, comparison class, and discriminating evidence.
-3. **Establish the evidence boundary.** Retrieve literature or source material, inspect provenance, and separate supplied claims from verified results.
-4. **Challenge the central claim.** Seek the strongest objection, alternative explanation, counterexample, hidden assumption, boundary case, simpler mechanism, and identification or implementation failure.
-5. **Run the cheapest discriminating check.** Prefer a minimal calculation, pilot, baseline, ablation, or experiment before full-scale work.
-6. **Validate the result.** Confirm that calculations actually ran, evidence supports the wording, uncertainty is represented, and artifacts can be reconstructed to the level the claim requires.
-7. **Decide the next phase.** Continue, revise, merge, stop, or escalate based on information gained rather than attachment to the initial hypothesis.
-
-A useful progression is landscape, gap, formalization, pilot, full study, and publication. Do not perform expensive downstream work before cheaper checks establish viability, and do not remain in planning when calculation or experiment is the next discriminating action.
-
-## Search and Investigation Bounds
-
-Before open-ended investigation:
-
-1. define the question and minimum evidence needed;
-2. set a reasonable depth or effort budget;
-3. diversify queries or methods rather than repeating near-identical attempts;
-4. stop when the budget is reached, sources become redundant, or information gain materially diminishes;
-5. record residual uncertainty and the next method needed to resolve it.
-
-Distinguish `not found within the performed search`, `no known example after substantial review`, and `proved not to exist`.
-
-## Reproducibility and Claim Strength
-
-For results that matter beyond the current session, preserve the relevant chain:
-
-`input/data → code/procedure → configuration → execution → output → figure/table → manuscript claim`
-
-A polished artifact is not a validated result. Match wording to evidence: distinguish proved, derived under assumptions, numerically observed, empirically supported, consistent with, suggestive, hypothesized, and conjectured.
-
-## Human Review Boundary
-
-Explicitly flag decisions requiring human judgment, especially central novelty claims, unresolved theorem assumptions, ambiguous causal interpretations, privacy-sensitive data handling, venue choice, high-stakes conclusions, and destructive or irreversible project changes.
+Use a subagent only when permitted and when independent judgment, parallel exploration, or isolation of a large noisy search materially improves the result. Do not spawn one for a small formula check, trivial file inspection, one-command validation, or routine formatting.
 
 ## Completion Gate
 
-Before declaring a substantial milestone complete, determine which of the following apply and report their status:
+Before declaring a substantial milestone complete, determine which checks apply:
 
-- research question and assumptions are explicit;
-- relevant literature was externally checked;
-- novelty and attribution are appropriately qualified;
-- central claims received adversarial scrutiny;
-- analytical, computational, and empirical claims have suitable validation;
-- uncertainty, limitations, and negative findings are recorded;
-- artifacts are reproducible enough for the intended use;
-- manuscript language matches the evidence;
-- unresolved issues and next actions are explicit.
+- question, scope, and assumptions are explicit;
+- relevant literature and attribution were externally checked;
+- central claims received domain-appropriate verification;
+- competing explanations and reviewer-level objections were considered;
+- negative results and residual uncertainty are recorded;
+- artifacts are reproducible enough for the intended claim;
+- manuscript wording matches the evidence;
+- remaining work and human decisions are explicit.
 
-Stop when the requested research decision or artifact is supported to the required standard and further work would not materially change it. Do not continue merely to make the process appear more comprehensive.
+Stop when the requested research decision or artifact is supported to the required standard and further work would not materially change it.

@@ -30,12 +30,16 @@
 
 ## Candidate Promotion
 
-- Target layer:
+- Canonical destination:
+- Existing overlap:
 - Proposed lesson or change:
+- Why this scope is sufficient:
+- Deterministic alternative:
 
 ## Validation Needed
 
+## Retirement or Rollback Trigger
+
 ## Status
 
-captured | assessed | candidate | promoted | rejected | superseded
-
+captured | assessed | candidate | promoted | merged | demoted | archived | rejected | superseded

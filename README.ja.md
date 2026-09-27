@@ -5,15 +5,16 @@
 Codexを慎重かつ再現可能に、そして処理を際限なく重くせず運用するための、
 実践的で意見を持った設定例です。
 
-このリポジトリでは、指示を次の三種類に分離しています。
+このリポジトリでは、恒久ルール、段階的に読む手続き、外部状態を分離しています。
 
 - `AGENTS.md`：ほぼすべてのタスクに適用する恒久的な作業上の合意
 - `.agents/skills/<name>/SKILL.md`：必要な場合だけ読み込むタスク固有の手続き
-- プロジェクトや学習の可変状態：このリポジトリには含めず、指示から分離
+- `HANDOFF.md`、Git、検証スクリプト、レポート：現在状態、履歴、機械的制約、
+  証拠をpersistent promptの外に保持
 
 中心となる判断基準は次のとおりです。
 
-> correctness x recoverability x reproducibility x cost efficiency
+> minimal persistent context + progressive disclosure + durable external state + explicit validation
 
 すべてのタスクを最大限に重くすることが目的ではありません。必要十分な手順を
 選び、ユーザーの作業を守り、不確実性を明示し、リスクに応じて検証し、依頼の
@@ -24,6 +25,12 @@ Codexを慎重かつ再現可能に、そして処理を際限なく重くせず
 ```text
 .
 ├── AGENTS.md
+├── docs/
+│   ├── CONTEXT_ARCHITECTURE.md
+│   ├── MIGRATION_REPORT.md
+│   └── EVAL_PROPOSAL.md
+├── scripts/
+│   └── validate_repository.py
 └── .agents/
     └── skills/
         ├── research/
@@ -45,8 +52,9 @@ Codexを慎重かつ再現可能に、そして処理を際限なく重くせず
 
 ### Research
 
-文献調査、新規性評価、理論・計算研究、実証研究、再現性、原稿作成、中断した
-研究の復旧を扱う研究用ワークフローです。
+文献調査、新規性評価、数学・計算・実証研究、Verification、Critical Review、
+出版・再現性、復旧を振り分ける薄いルーターです。現在の判断に影響するreferenceだけを
+読み込みます。
 
 検証済みの証拠、推論、仮説、仮定、未解決の不確実性を区別し、調査の上限、
 人間による確認事項、完了条件を定めています。
@@ -55,10 +63,9 @@ Codexを慎重かつ再現可能に、そして処理を際限なく重くせず
 
 重要な経験だけを、必要最小限の恒久的な介入へ昇格させるためのワークフローです。
 
-通常の成功タスクには何もしないStage 0を設けています。深い分析は、重大な失敗、
-再発、高い再利用価値、または明示的な自己改善依頼がある場合に限定します。
-一時的文脈から決定論的ガードレールまでの層を持ち、影響が大きいほど強い証拠、
-検証、人間のレビューを要求します。
+通常の成功や一度限りのノイズは対象外です。重要な経験は分類、検証、重複排除、圧縮を
+行い、必要十分な最小範囲へ配置します。重複・反証・陳腐化・modelの進歩に応じて、
+既存指示の統合、降格、archive、削除も扱います。
 
 ### Multidisciplinary Review
 
@@ -98,10 +105,21 @@ cd codex-working-agreements
 既存設定を無条件に上書きしないでください。差分を確認し、自分の環境に合わせ、
 代表的なタスクで挙動を検証してください。
 
+リポジトリの機械検証は次で実行できます。
+
+```sh
+python3 scripts/validate_repository.py
+```
+
+設計と証拠の境界は、[Context Architecture](docs/CONTEXT_ARCHITECTURE.md)、
+[Migration Report](docs/MIGRATION_REPORT.md)、
+[Evaluation Proposal](docs/EVAL_PROPOSAL.md)を参照してください。
+
 ## 状態と制約
 
 - OpenAI公式プロジェクトではなく、個人の作業設定です。
-- Skillは作者の環境で構造とfrontmatterの静的検証を通過しています。
+- Skillは作者の環境で構造、frontmatter、リンク、sensitive patternの静的検証を
+  通過しています。
 - 記載したリポジトリ用・ユーザー用Skillのパスは、現在のCodex公式ドキュメントと
   照合しています。行動上の有効性は、対照実験ではまだ検証していません。
 - 一部の規則は意図的に保守的で、使い捨ての試作には重すぎる場合があります。
@@ -110,7 +128,7 @@ cd codex-working-agreements
 
 ## スナップショットの由来
 
-このリポジトリは、2026-09-26にレビューした作者の現用設定をサニタイズした
+このリポジトリは、2026-09-27にレビューした作者の現用設定をサニタイズした
 スナップショットです。可変メモリ、タスク履歴、認証情報、ローカル設定、非公開の
 研究成果物は含みません。
 

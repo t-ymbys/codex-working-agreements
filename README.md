@@ -5,15 +5,17 @@
 A practical, opinionated configuration for making Codex work carefully,
 reproducibly, and with bounded effort.
 
-This repository separates three kinds of guidance:
+This repository separates persistent rules, progressive task guidance, and
+durable state:
 
 - `AGENTS.md`: durable working agreements that should apply to almost every task.
 - `.agents/skills/<name>/SKILL.md`: task-specific procedures loaded only when relevant.
-- mutable project or learning state: deliberately kept outside this repository.
+- `HANDOFF.md`, Git, checks, and reports: current state, history, deterministic
+  enforcement, and evidence, kept outside persistent prompt context.
 
 The central design rule is:
 
-> correctness x recoverability x reproducibility x cost efficiency
+> minimal persistent context + progressive disclosure + durable external state + explicit validation
 
 The goal is not to make every task maximally elaborate. The configuration asks
 Codex to use the smallest reliable process, preserve user work, state
@@ -25,6 +27,12 @@ outcome is satisfied.
 ```text
 .
 ├── AGENTS.md
+├── docs/
+│   ├── CONTEXT_ARCHITECTURE.md
+│   ├── MIGRATION_REPORT.md
+│   └── EVAL_PROPOSAL.md
+├── scripts/
+│   └── validate_repository.py
 └── .agents/
     └── skills/
         ├── research/
@@ -46,9 +54,10 @@ outcome is satisfied.
 
 ### Research
 
-A rigorous workflow for literature review, novelty assessment, theoretical and
-computational work, empirical studies, reproducibility, manuscript preparation,
-and interrupted-research recovery.
+A thin router for literature review, novelty assessment, mathematical,
+computational, and empirical research, verification, critical review,
+publication, reproducibility, and recovery. It loads only the references that
+can affect the current decision.
 
 It distinguishes verified evidence, inference, hypotheses, assumptions, and
 unresolved uncertainty. It also defines search bounds, human-review flags, and
@@ -59,11 +68,10 @@ completion gates.
 A governed workflow for turning selected operational experience into the
 smallest useful durable intervention.
 
-Its Stage 0 fast path deliberately does nothing for ordinary successful tasks.
-Deeper analysis is reserved for important failures, recurring problems,
-high-reuse techniques, or explicit self-improvement requests. Promotion ranges
-from transient context to deterministic guardrails, with stronger evidence and
-review required as impact increases.
+Ordinary success and one-off noise take the fast path. Meaningful experience is
+classified, validated, deduplicated, compressed, and routed to the narrowest
+sufficient scope. Guidance may also be merged, demoted, archived, or deleted
+when it becomes redundant, disproven, stale, or model-obsolete.
 
 ### Multidisciplinary Review
 
@@ -106,11 +114,21 @@ For personal, cross-repository use, selectively merge the parts you want into:
 Do not blindly overwrite an existing configuration. Compare, adapt, and test
 the instructions against representative tasks in your own environment.
 
+Run the deterministic repository checks with:
+
+```sh
+python3 scripts/validate_repository.py
+```
+
+See [Context Architecture](docs/CONTEXT_ARCHITECTURE.md),
+[Migration Report](docs/MIGRATION_REPORT.md), and
+[Evaluation Proposal](docs/EVAL_PROPOSAL.md) for design and evidence boundaries.
+
 ## Status and limitations
 
 - This is a personal working configuration, not an official OpenAI project.
 - The skill files have passed static structure and frontmatter validation in the
-  author's environment.
+  author's environment, including local link and sensitive-pattern checks.
 - The documented repository and user skill paths were checked against current
   official Codex documentation. Behavioral effectiveness has not been
   established by a controlled benchmark.
@@ -122,7 +140,7 @@ the instructions against representative tasks in your own environment.
 ## Snapshot provenance
 
 This repository is a sanitized snapshot of the author's active working
-agreements, reviewed on 2026-09-26. Mutable memory, task history, credentials,
+agreements, reviewed on 2026-09-27. Mutable memory, task history, credentials,
 local configuration, and private research artifacts are not included.
 
 ## License

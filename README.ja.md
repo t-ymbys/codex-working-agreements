@@ -1,136 +1,85 @@
-# Codex Working Agreements
+# Codex Agent Operating System
 
 [English](README.md)
 
-Codexを慎重かつ再現可能に、そして処理を際限なく重くせず運用するための、
-実践的で意見を持った設定例です。
+Codexの運用資産を、versioned・testable・installable・auditableな小さなAgent OSとして管理するrepositoryです。
 
-このリポジトリでは、恒久ルール、段階的に読む手続き、外部状態を分離しています。
+以下を分離します。
 
-- `AGENTS.md`：ほぼすべてのタスクに適用する恒久的な作業上の合意
-- `.agents/skills/<name>/SKILL.md`：必要な場合だけ読み込むタスク固有の手続き
-- `HANDOFF.md`、Git、検証スクリプト、レポート：現在状態、履歴、機械的制約、
-  証拠をpersistent promptの外に保持
+- **Cognitive Control:** global/project AGENTS、progressive disclosure型Skills、研究epistemics、HANDOFF、Experience Promotion
+- **Execution Control:** privateなmachine設定を保持したまま使えるapproval・sandbox・network・reasoning profile
+- **Durable State:** Git、HANDOFF、再構築可能なproject artifacts
+- **Deterministic Control:** validation、installation、doctor、rollback、plugin packaging
+- **Distribution:** MCP・hooks・credentials・個人設定を含まないSkill-only portable plugin
 
-中心となる判断基準は次のとおりです。
+設計原理は次のとおりです。
 
-> minimal persistent context + progressive disclosure + durable external state + explicit validation
-
-すべてのタスクを最大限に重くすることが目的ではありません。必要十分な手順を
-選び、ユーザーの作業を守り、不確実性を明示し、リスクに応じて検証し、依頼の
-達成条件を満たしたら停止することを目指しています。
+> minimal persistent context + progressive disclosure + least privilege + durable external state + explicit validation
 
 ## 構成
 
 ```text
 .
-├── AGENTS.md
+├── AGENTS.md                    # repository-local開発ルール
+├── global/AGENTS.md             # global runtime policyのcanonical source
+├── .agents/skills/              # canonicalかつrepoで発見可能なSkills
+├── config/
+│   ├── default/config.toml      # portable baseline例
+│   └── profiles/                # install可能なnamed profiles
+├── templates/project-AGENTS.md
+├── plugin/                      # Skill-only package manifests
+├── scripts/                     # validate/install/doctor/uninstall/package
 ├── docs/
-│   ├── CONTEXT_ARCHITECTURE.md
-│   ├── MIGRATION_REPORT.md
-│   └── EVAL_PROPOSAL.md
-├── scripts/
-│   └── validate_repository.py
-└── .agents/
-    └── skills/
-        ├── research/
-        │   ├── SKILL.md
-        │   ├── references/
-        │   └── assets/
-        ├── experience-promotion/
-        │   ├── SKILL.md
-        │   ├── references/
-        │   └── assets/
-        ├── multidisciplinary-review/
-        │   ├── SKILL.md
-        │   └── references/
-        └── local-first-app-development/
-            └── SKILL.md
+└── VERSION
 ```
 
-## 収録Skill
-
-### Research
-
-文献調査、新規性評価、数学・計算・実証研究、Verification、Critical Review、
-出版・再現性、復旧を振り分ける薄いルーターです。現在の判断に影響するreferenceだけを
-読み込みます。
-
-検証済みの証拠、推論、仮説、仮定、未解決の不確実性を区別し、調査の上限、
-人間による確認事項、完了条件を定めています。
-
-### Experience Promotion
-
-重要な経験だけを、必要最小限の恒久的な介入へ昇格させるためのワークフローです。
-
-通常の成功や一度限りのノイズは対象外です。重要な経験は分類、検証、重複排除、圧縮を
-行い、必要十分な最小範囲へ配置します。重複・反証・陳腐化・modelの進歩に応じて、
-既存指示の統合、降格、archive、削除も扱います。
-
-### Multidisciplinary Review
-
-重要な意思決定、研究フロンティアの問い、またはトッププロによる複眼的なレビューを
-明示的に求められた場合のための、選択的な分野横断ワークフローです。
-
-著名人の人物模倣ではなく、科学的発見、哲学、戦略・システム、創業者・経営者、
-AI・機械学習・クラウドの評価レンズへ変換します。結論に影響するレンズだけを読み、
-対立を残したまま統合し、権威に依存せず検証、推奨、または次の行動へつなげます。
-
-### Local-First App Development
-
-アプリやゲームの公開範囲を守るためのワークフローです。開発、テスト、プレビューは
-既定でローカルに限定し、デプロイや配布には公開先とリリース範囲を明示した依頼を
-必要とします。意図せずオンライン公開した場合には、アクセス制限と検証済みの削除を
-区別して後処理します。
+canonical Skillsはrepository-native discoveryに合わせて `.agents/skills` に維持します。Plugin生成時だけ標準`skills/`へ正確にコピーするため、二つ目の編集対象はありません。
 
 ## 利用方法
 
-まずcloneし、導入前に内容を確認してください。
+内容を確認してから実行してください。
 
 ```sh
-git clone https://github.com/t-ymbys/codex-working-agreements.git
-cd codex-working-agreements
+scripts/validate
+scripts/install --dry-run
+scripts/install
+scripts/doctor --include-codex-runtime
 ```
 
-このリポジトリ内でCodexを実行すると、ルートの `AGENTS.md` と
-`.agents/skills` 以下のSkillをリポジトリスコープで利用できます。
+installerが管理するのはglobal AGENTS、4つのrepository Skills、Agent OS profile filesだけです。変更前runtimeをbackupし、hash manifestを残します。privateな `~/.codex/config.toml`、credentials、MCP、plugin、project trust、memories、sessions、cachesは上書きしません。
 
-個人用の横断設定として使う場合は、必要な部分だけを次の場所へ統合します。
-
-```text
-~/.codex/AGENTS.md
-~/.agents/skills/<skill-name>/
-```
-
-既存設定を無条件に上書きしないでください。差分を確認し、自分の環境に合わせ、
-代表的なタスクで挙動を検証してください。
-
-リポジトリの機械検証は次で実行できます。
+Skill-only Plugin packageは次で生成します。
 
 ```sh
-python3 scripts/validate_repository.py
+scripts/package-plugin
 ```
 
-設計と証拠の境界は、[Context Architecture](docs/CONTEXT_ARCHITECTURE.md)、
-[Migration Report](docs/MIGRATION_REPORT.md)、
-[Evaluation Proposal](docs/EVAL_PROPOSAL.md)を参照してください。
+既定の生成先はGit管理外の`dist/`です。
 
-## 状態と制約
+## 収録Skills
 
-- OpenAI公式プロジェクトではなく、個人の作業設定です。
-- Skillは作者の環境で構造、frontmatter、リンク、sensitive patternの静的検証を
-  通過しています。
-- 記載したリポジトリ用・ユーザー用Skillのパスは、現在のCodex公式ドキュメントと
-  照合しています。行動上の有効性は、対照実験ではまだ検証していません。
-- 一部の規則は意図的に保守的で、使い捨ての試作には重すぎる場合があります。
-- Codexの更新によりパスや挙動が変わる可能性があります。環境依存事項は最新の
-  公式ドキュメントを確認してください。
+- **Research:** literature、mathematical、computational、empirical、verification、critical review、publication、reproducibility、recoveryを選択的にrouting
+- **Experience Promotion:** evidenceに基づく分類、重複排除、圧縮、最小scopeへの配置、統合、降格、archive、削除
+- **Multidisciplinary Review:** 重要な分野横断意思決定の選択的レビュー
+- **Local-First App Development:** 暗黙に公開せず、localで開発・検証
 
-## スナップショットの由来
+## 文書
 
-このリポジトリは、2026-09-27にレビューした作者の現用設定をサニタイズした
-スナップショットです。可変メモリ、タスク履歴、認証情報、ローカル設定、非公開の
-研究成果物は含みません。
+- [Architecture](docs/architecture.md)
+- [Environment inventory](docs/inventory.md)
+- [Risk report](docs/risk-report.md)
+- [Configuration](docs/configuration.md)
+- [Installation and rollback](docs/installation.md)
+- [Security](docs/security.md)
+- [Development](docs/development.md)
+- [Migration mapping](docs/migration.md)
+- [Evaluation](docs/evaluation.md)
+
+## 証拠の境界
+
+静的validationとisolated deployment testは構造的完全性と再現可能性を示しますが、agent behaviorの改善を証明しません。複数runのgolden-task evalを実施するまで、行動上の優越性は`NOT VERIFIED`です。
+
+これはOpenAI公式projectではなく、sanitizedした個人設定projectです。config schema変更やPlugin公開前には最新のCodex公式documentationを再確認してください。
 
 ## ライセンス
 

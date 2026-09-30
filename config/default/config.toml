@@ -1,0 +1,7 @@
+# Portable least-privilege baseline. Merge deliberately into machine-local config;
+# the installer does not overwrite ~/.codex/config.toml.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+# Command network access remains disabled in workspace-write unless explicitly
+# enabled in a task-specific profile or one-off override.

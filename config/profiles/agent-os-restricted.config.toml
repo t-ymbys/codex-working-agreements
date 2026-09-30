@@ -1,0 +1,4 @@
+# Use for inspection, planning, and tasks that should not write locally.
+approval_policy = "on-request"
+sandbox_mode = "read-only"
+web_search = "disabled"

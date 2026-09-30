@@ -1,0 +1,8 @@
+# Use only when research needs command-level network access. Web search and
+# sandboxed command networking are separate controls and are both explicit here.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "live"
+
+[sandbox_workspace_write]
+network_access = true

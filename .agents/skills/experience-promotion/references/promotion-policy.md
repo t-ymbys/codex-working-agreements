@@ -2,6 +2,8 @@
 
 Use this reference before materially changing durable guidance or enforcement.
 
+When the target is an installed Agent OS artifact, modify its canonical version-controlled source, validate the source diff, run a proportional eval when the change is consequential, checkpoint it, and only then install it. Do not make a live runtime file the unreviewed durable source of a self-modification.
+
 ## Prepare the Intervention
 
 1. Name the observed problem or verified success path.

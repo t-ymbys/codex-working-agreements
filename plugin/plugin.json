@@ -1,0 +1,17 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-agent-os-skills",
+  "version": "0.2.0",
+  "description": "Progressively disclosed research, operational-learning, multidisciplinary-review, and local-first development workflows for Codex.",
+  "author": {
+    "name": "t-ymbys"
+  },
+  "repository": "https://github.com/t-ymbys/codex-working-agreements",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "research",
+    "reproducibility",
+    "agent-workflows"
+  ]
+}

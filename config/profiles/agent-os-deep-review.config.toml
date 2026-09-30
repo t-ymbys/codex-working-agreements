@@ -1,0 +1,5 @@
+# Higher-cost reasoning for an isolated difficult review. Network stays at the
+# workspace-write default (off) unless enabled for the invocation.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+model_reasoning_effort = "high"

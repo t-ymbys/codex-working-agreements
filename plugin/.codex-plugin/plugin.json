@@ -1,0 +1,35 @@
+{
+  "name": "codex-agent-os-skills",
+  "version": "0.2.0",
+  "description": "Progressively disclosed research and operational workflows for Codex.",
+  "author": {
+    "name": "t-ymbys"
+  },
+  "repository": "https://github.com/t-ymbys/codex-working-agreements",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "research",
+    "reproducibility",
+    "agent-workflows"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex Agent OS Skills",
+    "shortDescription": "Rigorous, progressively disclosed Codex workflows",
+    "longDescription": "Reusable research, experience-promotion, multidisciplinary-review, and local-first development workflows without personal configuration or external services.",
+    "developerName": "t-ymbys",
+    "category": "Productivity",
+    "capabilities": [
+      "Research verification",
+      "Operational learning",
+      "Decision review",
+      "Local-first development"
+    ],
+    "defaultPrompt": [
+      "Verify this research claim and state the evidence boundary.",
+      "Review this experience and route any durable lesson.",
+      "Audit this app workflow without publishing it."
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+schema_version: game-studio/v0.4
+comparison_boundary: null
+references: []
+# Each entry may record source, source_type, why_it_works,
+# transferable_principle, changed_constraint, new_interaction,
+# intended_player_experience, inherited_elements, transformed_elements,
+# new_relationships, new_player_behaviors, new_experiences,
+# derivative_risk, provenance, and accessed_at.
+anti_references: []
+differentiation_statement: null
+remaining_risks: []

@@ -1,0 +1,21 @@
+schema_version: game-studio/v0.4
+concept_conviction:
+  status: unknown
+  evidence: []
+prototype_conviction:
+  status: unknown
+  evidence: []
+system_conviction:
+  status: unknown
+  evidence: []
+aesthetic_conviction:
+  status: unknown
+  evidence: []
+signature_conviction:
+  status: unknown
+  evidence: []
+reasons_to_make: []
+known_problems: []
+creator_position: null
+player_validation_is_separate: true
+updated_at: null

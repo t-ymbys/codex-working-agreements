@@ -1,0 +1,17 @@
+schema_version: game-studio/v0.4
+experiments: []
+# Each entry uses:
+# - id
+# - question
+# - hypothesis
+# - prototype_rung
+# - change
+# - controlled_variables
+# - observations
+# - creator_feedback
+# - player_feedback
+# - automated_results
+# - evidence_level
+# - decision
+# - next_step
+# - prototype_version

@@ -1,0 +1,13 @@
+schema_version: game-studio/v0.4
+hypotheses:
+  - id: FH-001
+    target_player: Players who enjoy inference under uncertainty.
+    mechanism: Interpret incomplete clues and choose a diagnosis with irreversible consequences.
+    expected_behavior: Compare evidence, test competing explanations, and hesitate before committing.
+    desired_experience: Earned tension followed by responsibility for the outcome.
+    observable_signal: Players cite clues, revisit evidence, and disagree for intelligible reasons.
+    failure_signal: Players identify the answer by rote matching or guess without consulting clues.
+    evidence_level: E1
+    confidence: medium
+    status: active
+    provenance: Analytical decomposition of the existing concept; no playtest performed.

@@ -1,0 +1,13 @@
+schema_version: game-studio/v0.4
+hypotheses:
+  - id: FH-001
+    target_player: Players who enjoy spatial inference and revising mental models.
+    mechanism: Navigate an archive whose passages change with remembered relationships.
+    expected_behavior: Form, test, and revise a map of places and memories.
+    desired_experience: Discovery that feels surprising and retrospectively coherent.
+    observable_signal: Players predict a route, test it, and explain why their model changed.
+    failure_signal: Route changes appear arbitrary or players wait for explicit instructions.
+    evidence_level: E0
+    confidence: low
+    status: active
+    provenance: Synthetic zero-to-concept fixture; no creator confirmation or playtest.

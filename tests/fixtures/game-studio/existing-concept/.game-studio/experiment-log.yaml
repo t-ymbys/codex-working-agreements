@@ -1,0 +1,16 @@
+schema_version: game-studio/v0.4
+experiments:
+  - id: EX-001
+    question: Do incomplete clues create a meaningful judgment rather than a matching task?
+    hypothesis: FH-001
+    prototype_rung: P0
+    change: Build one paper or local encounter with two plausible diagnoses and distinct consequences.
+    controlled_variables: [presentation, reward, progression]
+    observations: []
+    creator_feedback: []
+    player_feedback: []
+    automated_results: []
+    evidence_level: E1
+    decision: hold
+    next_step: Implement only the encounter and capture creator behavior before adding content.
+    prototype_version: not_built

@@ -1,0 +1,18 @@
+schema_version: game-studio/v0.4
+evaluation_id: null
+subject_version: null
+question: null
+evaluator_role: independent
+participant_type: none
+protocol: null
+selected_dimensions: []
+raw_observations: []
+claims: []
+# Each claim uses dimension, judgment, evidence_level, confidence,
+# rationale, provenance, and limitations.
+creator_playtest: null
+player_playtest: null
+adversarial_findings: []
+recommendation: hold
+unverified_human_dominant_claims: []
+evaluated_at: null

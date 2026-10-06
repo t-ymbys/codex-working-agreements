@@ -46,7 +46,7 @@ scripts/install
 scripts/doctor --include-codex-runtime
 ```
 
-installerが管理するのはglobal AGENTS、4つのrepository Skills、Agent OS profile filesだけです。変更前runtimeをbackupし、hash manifestを残します。privateな `~/.codex/config.toml`、credentials、MCP、plugin、project trust、memories、sessions、cachesは上書きしません。
+installerが管理するのはglobal AGENTS、`.agents/skills/`配下で検出したrepository Skills、Agent OS profile filesだけです。変更前runtimeをbackupし、hash manifestを残します。privateな `~/.codex/config.toml`、credentials、MCP、plugin、project trust、memories、sessions、cachesは上書きしません。
 
 Skill-only Plugin packageは次で生成します。
 
@@ -62,6 +62,7 @@ scripts/package-plugin
 - **Experience Promotion:** evidenceに基づく分類、重複排除、圧縮、最小scopeへの配置、統合、降格、archive、削除
 - **Multidisciplinary Review:** 重要な分野横断意思決定の選択的レビュー
 - **Local-First App Development:** 暗黙に公開せず、localで開発・検証
+- **Game Studio v0.4:** creative direction、作品系譜とoriginality、concept/system design、experiment選択、local implementation、独立eevaluation、evidenceに基づくiterationを選択的に読み込む9つのSkills。制作disciplineを実装するが、game quality改善はまだbehavioralに検証されていない。
 
 ## 文書
 
@@ -74,6 +75,8 @@ scripts/package-plugin
 - [Development](docs/development.md)
 - [Migration mapping](docs/migration.md)
 - [Evaluation](docs/evaluation.md)
+- [Game Studio v0.4 architecture](docs/game-studio-v0.4-architecture.md)
+- [Game Studio v0.4 evaluation](docs/game-studio-v0.4-evaluation.md)
 
 ## 証拠の境界
 

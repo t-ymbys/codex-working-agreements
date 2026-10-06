@@ -9,6 +9,7 @@ Snapshot date: 2026-09-30. Paths use `~` intentionally; private values were not 
 | `~/Desktop/git/codex-working-agreements` | Portable Agent OS source | `ACTIVE`, `SOURCE` | This repository | Yes | Sanitized source | Clean at pre-refactor checkpoint `d3019ee` |
 | `~/.codex/AGENTS.md` | Live global cognitive policy | `ACTIVE`, `RUNTIME`, installed copy | `global/AGENTS.md` after migration | No | No direct copy | Matched the prior canonical source before refactor |
 | `~/.agents/skills/{research,experience-promotion,multidisciplinary-review,local-first-app-development}` | Live personal Skills | `ACTIVE`, `RUNTIME`, installed copies | `.agents/skills/*` | No | Via Skill-only package | All four matched prior canonical source before refactor |
+| `.agents/skills/game-*` | Game Studio v0.4 Skill sources | `SOURCE`, `NOT INSTALLED` | This repository | Yes | Via Skill-only package after explicit install | Nine Phase 1 Skills; structural validation is not behavioral proof |
 | `~/.agents/skills/.system` and `~/.codex/skills/.system` | Bundled system Skills | `ACTIVE`, `RUNTIME`, managed | Codex installation | No | No | Do not vendor or overwrite |
 | `~/.codex/config.toml` | Live execution and desktop configuration | `ACTIVE`, `RUNTIME`, `PRIVATE`, machine-specific | Machine-local file | No | Never wholesale | Mode `0600`; parses under current strict config |
 | `~/.codex/*.config.toml` | Named profile layers | Absent at audit start | Canonical profile templates after migration | No | Templates only | Current syntax uses separate profile files |

@@ -1,0 +1,12 @@
+schema_version: game-studio/v0.4
+decisions: []
+# Each entry uses:
+# - id
+# - decision
+# - alternatives
+# - reason
+# - evidence
+# - creator_position
+# - status
+# - reversal_condition
+# - decided_at

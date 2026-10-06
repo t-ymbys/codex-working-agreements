@@ -1,0 +1,22 @@
+schema_version: game-studio/v0.4
+current_bottleneck: unknown
+dimensions:
+  core_loop: unknown
+  game_feel: unknown
+  depth: unknown
+  difficulty: unknown
+  progression: unknown
+  content: unknown
+  world: unknown
+  narrative: unknown
+  visual_identity: unknown
+  audio_identity: unknown
+  ux: unknown
+  onboarding: unknown
+  performance: unknown
+  stability: unknown
+  testing: unknown
+  distribution: unknown
+evidence: []
+next_bottleneck_test: null
+updated_at: null

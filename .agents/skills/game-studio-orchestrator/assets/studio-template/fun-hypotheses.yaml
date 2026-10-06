@@ -1,0 +1,14 @@
+schema_version: game-studio/v0.4
+hypotheses: []
+# Each entry uses:
+# - id
+# - target_player
+# - mechanism
+# - expected_behavior
+# - desired_experience
+# - observable_signal
+# - failure_signal
+# - evidence_level
+# - confidence
+# - status
+# - provenance

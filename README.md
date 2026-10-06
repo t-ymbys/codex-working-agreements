@@ -46,7 +46,11 @@ scripts/install
 scripts/doctor --include-codex-runtime
 ```
 
-The installer manages only global AGENTS, the four repository Skills, and named Agent OS profile files. It backs up changed destinations and writes a hash manifest. It does **not** replace the private base `~/.codex/config.toml`, credentials, MCP settings, plugin state, project trust, memories, sessions, or caches.
+The installer manages only global AGENTS, the repository Skills discovered under
+`.agents/skills/`, and named Agent OS profile files. It backs up changed
+destinations and writes a hash manifest. It does **not** replace the private base
+`~/.codex/config.toml`, credentials, MCP settings, plugin state, project trust,
+memories, sessions, or caches.
 
 Build a distributable Skill-only plugin with:
 
@@ -62,6 +66,11 @@ Generated packages go under ignored `dist/` by default.
 - **Experience Promotion:** evidence-based classification, deduplication, compression, narrow routing, maintenance, demotion, archive, and deletion.
 - **Multidisciplinary Review:** selective cross-domain review for consequential decisions.
 - **Local-First App Development:** local development and validation without implicit publication.
+- **Game Studio v0.4:** nine progressively disclosed Skills for creative
+  direction, lineage-aware originality, concept and systems design, experiment
+  selection, local implementation, independent evaluation, and evidence-led
+  iteration. The suite improves production discipline; improved game quality is
+  not yet behaviorally verified.
 
 ## Documentation
 
@@ -74,6 +83,8 @@ Generated packages go under ignored `dist/` by default.
 - [Development](docs/development.md)
 - [Migration mapping](docs/migration.md)
 - [Evaluation](docs/evaluation.md)
+- [Game Studio v0.4 architecture](docs/game-studio-v0.4-architecture.md)
+- [Game Studio v0.4 evaluation](docs/game-studio-v0.4-evaluation.md)
 
 ## Evidence Boundary
 

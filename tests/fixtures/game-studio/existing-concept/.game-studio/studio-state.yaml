@@ -1,0 +1,19 @@
+schema_version: game-studio/v0.4
+project_name: Lantern Case Test
+ambition: prototype
+prototype_rung: D0
+current_stage: prototype_strategy
+current_bottleneck: decision_quality
+next_decision: Test whether clue interpretation creates competing plausible judgments.
+active_hypothesis_ids: [FH-001]
+active_experiment_ids: [EX-001]
+latest_evidence: [E1]
+gate:
+  decision: hold
+  rationale: Analytical clarification exists, but no runnable encounter or human play evidence exists.
+  decided_by: fixture_author
+  decided_at: 2026-10-07
+human_decisions_required: []
+open_questions:
+  - Does the creator prefer reversible investigation or irreversible judgment?
+updated_at: 2026-10-07

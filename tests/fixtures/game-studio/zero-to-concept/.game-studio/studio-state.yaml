@@ -1,0 +1,20 @@
+schema_version: game-studio/v0.4
+project_name: Tidal Archive Test
+ambition: signature_candidate
+prototype_rung: D0
+current_stage: creative_direction
+current_bottleneck: creator_intent
+next_decision: Choose whether the signature experience is navigation mastery or memory reconstruction.
+active_hypothesis_ids: [FH-001]
+active_experiment_ids: []
+latest_evidence: [E0]
+gate:
+  decision: hold
+  rationale: The concept is deliberately uncommitted until the creator selects the signature direction.
+  decided_by: fixture_author
+  decided_at: 2026-10-07
+human_decisions_required:
+  - Select the non-negotiable signature experience.
+open_questions:
+  - What exact moment would the creator want to describe ten years later?
+updated_at: 2026-10-07

@@ -1,0 +1,18 @@
+schema_version: game-studio/v0.4
+project_name: null
+ambition: prototype
+prototype_rung: D0
+current_stage: creative_direction
+current_bottleneck: unknown
+next_decision: null
+active_hypothesis_ids: []
+active_experiment_ids: []
+latest_evidence: []
+gate:
+  decision: hold
+  rationale: No project evidence has been recorded.
+  decided_by: null
+  decided_at: null
+human_decisions_required: []
+open_questions: []
+updated_at: null

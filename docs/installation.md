@@ -23,7 +23,8 @@ It does not overwrite `~/.codex/config.toml`, credentials, MCP settings, plugin 
 
 - **Idempotent:** identical destinations are reported as up to date.
 - **Deterministic:** installed artifacts are exact source copies with SHA-256 digests.
-- **Recoverable:** differing destinations are moved into a timestamped backup before replacement.
+- **Recoverable:** conflicting unmanaged destinations are backed up before replacement. Managed updates retain the original backup.
+- **Preflight:** both dry-run and install check all planned destinations for drift and backup collisions before writing. A storage failure or interruption during copying can still require recovery.
 - **Scoped:** unrelated Skills and configuration are untouched.
 - **Observable:** `agent-os-install.json` records version, source revision, destinations, hashes, and backups.
 - **Drift-aware:** doctor and uninstall refuse to treat modified installed files as unchanged managed output.

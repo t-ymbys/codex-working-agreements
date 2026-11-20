@@ -138,6 +138,25 @@ def validate_skill(skill_file: Path, report: Report) -> None:
             report.error(f"unrouted reference from {rel}: {reference.name}")
 
 
+def check_startup_config(codex: str, home: Path, label: str, report: Report) -> None:
+    # Startup validation loads the config without starting a model session.
+    # Keep the startup JSON private: a runtime config can contain local details.
+    try:
+        with tempfile.TemporaryDirectory(prefix="agent-os-cwd-") as cwd:
+            result = subprocess.run(
+                [codex, "app-server", "--strict-config", "--print-startup-config"],
+                env=dict(os.environ, CODEX_HOME=str(home.resolve())), cwd=cwd,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30,
+            )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        report.error(f"could not validate {label}: {type(error).__name__}")
+        return
+    if result.returncode:
+        report.error(f"strict startup check failed for {label} (exit {result.returncode})")
+    else:
+        report.pass_(f"current Codex accepts {label}")
+
+
 def validate_config_with_codex(path: Path, report: Report) -> None:
     codex = shutil.which("codex")
     if codex is None:
@@ -146,17 +165,7 @@ def validate_config_with_codex(path: Path, report: Report) -> None:
     with tempfile.TemporaryDirectory(prefix="agent-os-config-") as temp:
         home = Path(temp)
         shutil.copy2(path, home / "config.toml")
-        env = os.environ.copy()
-        env["CODEX_HOME"] = str(home)
-        result = subprocess.run(
-            [codex, "--strict-config", "--version"], env=env, text=True,
-            capture_output=True, timeout=30,
-        )
-    if result.returncode:
-        detail = (result.stderr or result.stdout).strip().splitlines()[-1:]
-        report.error(f"unsupported config in {path.relative_to(ROOT)}: {' '.join(detail)}")
-    else:
-        report.pass_(f"current Codex accepts {path.relative_to(ROOT)}")
+        check_startup_config(codex, home, str(path.relative_to(ROOT)), report)
 
 
 def validate_manifests(report: Report) -> None:
@@ -315,12 +324,14 @@ def install(codex_home: Path, agents_home: Path, dry_run: bool) -> int:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     backup_root = codex_home / BACKUP_DIR / timestamp
     records: list[dict[str, Any]] = []
+    pending = []
     for index, item in enumerate(managed_artifacts(codex_home, agents_home)):
         source: Path = item["source"]
         destination: Path = item["destination"]
         expected = digest_path(source)
         old = previous_by_dest.get(str(destination), {})
         backup: Path | None = Path(old["backup"]) if old.get("backup") else None
+        new_backup = None
         if destination.exists() or destination.is_symlink():
             try:
                 current = digest_path(destination)
@@ -339,19 +350,21 @@ def install(codex_home: Path, agents_home: Path, dry_run: bool) -> int:
             else:
                 backup = backup_root / f"{index:02d}-{destination.name}"
                 print(f"backup: {destination} -> {backup}")
-                if not dry_run:
-                    backup.parent.mkdir(parents=True, exist_ok=True)
-                    if backup.exists():
-                        print(f"refusing install: backup target already exists: {backup}")
-                        return 1
-                    shutil.move(str(destination), str(backup))
+                if backup.exists() or backup.is_symlink():
+                    print(f"refusing install: backup target already exists: {backup}")
+                    return 1
+                new_backup = backup
         print(f"install: {source_label(source)} -> {destination}")
-        if not dry_run:
-            copy_artifact(source, destination, item["kind"])
+        pending.append((source, destination, item["kind"], new_backup))
         records.append({"kind": item["kind"], "source": source_label(source), "destination": str(destination), "sha256": expected, "backup": str(backup) if backup else None})
     if dry_run:
         print("dry-run: no files changed")
         return 0
+    for source, destination, kind, new_backup in pending:
+        if new_backup is not None:
+            new_backup.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(destination), str(new_backup))
+        copy_artifact(source, destination, kind)
     codex_home.mkdir(parents=True, exist_ok=True)
     manifest = {
         "schema_version": 1,
@@ -502,13 +515,10 @@ def doctor(codex_home: Path, agents_home: Path, include_runtime: bool) -> int:
     config_risk_summary(config, report)
     codex = shutil.which("codex")
     if codex:
-        strict = subprocess.run([codex, "--strict-config", "--version"], text=True, capture_output=True, timeout=30)
-        if strict.returncode:
-            report.error("current Codex rejects runtime config under --strict-config")
-        else:
-            report.pass_("current Codex accepts runtime config under --strict-config")
+        if config.is_file():
+            check_startup_config(codex, codex_home, "runtime config under --strict-config", report)
         if include_runtime:
-            result = subprocess.run([codex, "doctor", "--json"], text=True, capture_output=True, timeout=60)
+            result = subprocess.run([codex, "doctor", "--json"], env=dict(os.environ, CODEX_HOME=str(codex_home.resolve())), text=True, capture_output=True, timeout=60)
             try:
                 payload = json.loads(result.stdout)
                 checks = payload.get("checks", {})

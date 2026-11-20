@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import contextlib
 import io
+import shutil
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,6 +58,38 @@ class AgentOSTest(unittest.TestCase):
             with (codex_home / "AGENTS.md").open("a", encoding="utf-8") as handle:
                 handle.write("runtime drift\n")
             self.assertEqual(1, self.quiet(agent_os.uninstall, codex_home))
+
+    @unittest.skipUnless(shutil.which("codex"), "requires the Codex configuration loader")
+    def test_config_loader_rejects_invalid_toml_and_unknown_fields(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            config = root / "config.toml"
+            with patch.object(agent_os, "ROOT", root):
+                for invalid in ("broken = [", "agent_os_unknown_probe = true"):
+                    with self.subTest(invalid=invalid):
+                        config.write_text(invalid, encoding="utf-8")
+                        report = agent_os.Report()
+                        agent_os.validate_config_with_codex(config, report)
+                        self.assertTrue(report.errors)
+
+    def test_late_drift_prevents_earlier_update(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            codex, agents = base / "codex", base / "agents"
+            source = base / "global.md"
+            source.write_text("original", encoding="utf-8")
+            with patch.object(agent_os, "GLOBAL_AGENTS", source):
+                self.assertEqual(0, self.quiet(agent_os.install, codex, agents, False))
+                manifest = codex / agent_os.INSTALL_MANIFEST
+                before = manifest.read_bytes()
+                source.write_text("updated", encoding="utf-8")
+                late = agents / "skills" / "research" / "SKILL.md"
+                late.write_text("user edit", encoding="utf-8")
+                for dry_run in (True, False):
+                    self.assertEqual(1, self.quiet(agent_os.install, codex, agents, dry_run))
+                    self.assertEqual("original", (codex / "AGENTS.md").read_text())
+                    self.assertEqual("user edit", late.read_text())
+                    self.assertEqual(before, manifest.read_bytes())
 
     def test_managed_update_preserves_original_backup(self):
         with tempfile.TemporaryDirectory() as temp:

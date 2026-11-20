@@ -25,6 +25,16 @@ sandbox_mode = "workspace-write"
 
 Command network remains off in the ordinary workspace-write profile. This supports routine repository work without defaulting to unrestricted filesystem or network access.
 
+These templates use the established sandbox settings. Codex also supports beta
+permission profiles selected by `default_permissions` (for example,
+`:workspace` or `:read-only`) and custom rules under `[permissions]`.
+A named CLI configuration profile can supply sandbox settings itself. When
+migrating, review every loaded layer: an explicit `sandbox_mode` or
+`--sandbox` normally selects the older settings. Managed
+`allowed_permission_profiles` takes precedence. Follow the
+[permission profile guide](https://learn.chatgpt.com/docs/permissions)
+when migrating the base config and its overrides together.
+
 ## Named Profiles
 
 - `agent-os-restricted`: read-only, on-request, web search disabled.
@@ -49,7 +59,12 @@ Plugin enablement and marketplace state are preserved as machine-local runtime c
 
 ## Schema Verification
 
-Run `scripts/validate` to check all portable templates with the installed Codex using `--strict-config`. Run `scripts/doctor --include-codex-runtime` when effective sandbox, approval, and runtime health should also be inspected.
+Run `scripts/validate` to load each portable template as an isolated base config
+with `codex app-server --strict-config --print-startup-config`. This checks
+syntax and recognized settings. Run `scripts/doctor` to check the selected
+runtime home's base config and file parity. Use `--include-codex-runtime` for
+the built-in runtime diagnostics. Effective permissions also depend on profile
+selection and managed requirements.
 
 Official references:
 
